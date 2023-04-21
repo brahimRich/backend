@@ -40,13 +40,13 @@ public class ProduitService {
     @Transactional
     public void updateProduit(Long reference, String name, String img) throws IllegalAccessException {
         PointLumineux produit = PointLumineuxRepository.findById(reference).orElseThrow(()-> new IllegalArgumentException("Produit with reference "+reference+" does not exists"));
-        if(name != null && name.length()>0 && !Objects.equals(produit.getName(),name)){
+       // if(name != null && name.length()>0 && !Objects.equals(produit.getName(),name)){
            /* Optional<Produit> produitOptional = produitRepository.findProduitByName(name);
             if(produitOptional.isPresent()){
                 throw new IllegalAccessException("Name Token");
             }*/
-            produit.setName(name);
-        }
+           // produit.se(name);
+       // }
         System.out.println(produit);
     }
 }
