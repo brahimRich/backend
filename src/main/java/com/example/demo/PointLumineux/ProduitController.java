@@ -30,9 +30,8 @@ public class ProduitController {
     @PutMapping(value = "update/{reference}")
     public void updatepointLumineux(
             @PathVariable("reference") Long reference,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String img
+            @RequestBody PointLumineux pointLumineux
     ) throws IllegalAccessException {
-        produitService.updateProduit(reference,name,img);
+        produitService.updateProduit(reference,pointLumineux);
     }
 }

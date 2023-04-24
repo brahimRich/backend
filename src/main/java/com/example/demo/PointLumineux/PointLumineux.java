@@ -150,6 +150,7 @@ public class PointLumineux {
     public void setAllume(boolean allume) {
         this.allume = allume;
     }
+    public boolean getAllume() {return this.allume ;}
 
     public double getLongitude() {
         return longitude;
