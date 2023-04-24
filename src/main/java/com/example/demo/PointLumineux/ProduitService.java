@@ -1,22 +1,25 @@
 package com.example.demo.PointLumineux;
 
+import com.example.demo.Adresse.AdressRepository;
+import com.example.demo.coordonnees.CoordonnesRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.Date;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class ProduitService {
     private final PointLumineuxRepository PointLumineuxRepository;
+    private final com.example.demo.Adresse.AdressRepository AdressRepository;
+    private final CoordonnesRepository CoordonnesRepository;
 
     @Autowired
-    public ProduitService(PointLumineuxRepository PointLumineuxRepository){
+    public ProduitService(PointLumineuxRepository PointLumineuxRepository,AdressRepository AdressRepository,CoordonnesRepository CoordonnesRepository){
         this.PointLumineuxRepository = PointLumineuxRepository;
+        this.AdressRepository=AdressRepository;
+        this.CoordonnesRepository=CoordonnesRepository;
     }
 
     public List<PointLumineux> getPointLumineux() {
@@ -28,6 +31,9 @@ public class ProduitService {
         if(produitOptional.isPresent()){
             throw new IllegalAccessException("Name Token");
         }*/
+if(produit.getAdresse()!=null)
+        AdressRepository.save(produit.getAdresse());
+        CoordonnesRepository.save(produit.getCoordonnees());
         PointLumineuxRepository.save(produit);
     }
 
