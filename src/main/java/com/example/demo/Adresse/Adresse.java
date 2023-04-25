@@ -1,12 +1,17 @@
 package com.example.demo.Adresse;
 
+
+import com.example.demo.Adresse.Adresse;
 import com.example.demo.PointLumineux.PointLumineux;
+import com.example.demo.coordonnees.Coordonnees;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Adresse {
+public class Adresse implements Serializable {
     @Id
     @SequenceGenerator(
             name = "PointLumineux_sequence",
@@ -22,7 +27,7 @@ public class Adresse {
     private String rue;
     private String quertier;
 
-    @OneToMany
+    /*@OneToMany
     private List<PointLumineux> pointLumineuxList;
 
     public List<PointLumineux> getPointLumineuxList() {
@@ -31,7 +36,7 @@ public class Adresse {
 
     public void setPointLumineuxList(List<PointLumineux> pointLumineuxList) {
         this.pointLumineuxList = pointLumineuxList;
-    }
+    }*/
 
     public Adresse() {
     }

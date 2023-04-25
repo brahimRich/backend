@@ -21,6 +21,7 @@ public class ProduitController {
     }
     @PostMapping("/add")
     public void addpointLumineux(@RequestBody PointLumineux pointLumineux) throws IllegalAccessException {
+        System.out.println("ajout avant ------------- "+pointLumineux.getAdresse().getRue());
         produitService.addPointLumineux(pointLumineux);
     }
     @DeleteMapping(value = "/delete/{reference}")

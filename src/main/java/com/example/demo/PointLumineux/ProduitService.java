@@ -1,6 +1,8 @@
 package com.example.demo.PointLumineux;
 
 import com.example.demo.Adresse.AdressRepository;
+import com.example.demo.Adresse.Adresse;
+import com.example.demo.coordonnees.Coordonnees;
 import com.example.demo.coordonnees.CoordonnesRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +28,12 @@ public class ProduitService {
         return PointLumineuxRepository.findAll();
     }
     public void addPointLumineux(PointLumineux produit) throws IllegalAccessException {
-        System.out.println("ajout ************************************");
+        System.out.println("ajout ************************************ "+produit.getAdresse().getRue());
         /*Optional<PointLumineux> produitOptional = PointLumineuxRepository.findProduitByName(produit.getName());
         if(produitOptional.isPresent()){
             throw new IllegalAccessException("Name Token");
         }*/
-if(produit.getAdresse()!=null)
+        if(produit.getAdresse()!=null)
         AdressRepository.save(produit.getAdresse());
         CoordonnesRepository.save(produit.getCoordonnees());
         PointLumineuxRepository.save(produit);
@@ -49,7 +51,9 @@ if(produit.getAdresse()!=null)
     public void updateProduit(Long reference, PointLumineux p) throws IllegalAccessException {
         System.out.println("updatee ************************************ "+reference);
         System.out.println("type ************************************ "+p.getType());
-        PointLumineux pointLumineux = PointLumineuxRepository.findById(reference).orElseThrow(()-> new IllegalArgumentException("Produit with reference "+reference+" does not exists"));
+        PointLumineux pointLumineux = PointLumineuxRepository.findById(reference).orElseThrow(()-> new IllegalArgumentException("point with reference "+reference+" does not exists"));
+        Adresse adresse = AdressRepository.findById(p.getAdresse().getId()).orElseThrow(()-> new IllegalArgumentException("adresse with reference "+reference+" does not exists"));
+        Coordonnees coordonnees = CoordonnesRepository.findById(p.getCoordonnees().getId()).orElseThrow(()-> new IllegalArgumentException("cordonnes with reference "+reference+" does not exists"));
         pointLumineux.setType(p.getType());
         pointLumineux.setAdresse(p.getAdresse());
         pointLumineux.setAllume(p.getAllume());
@@ -63,6 +67,10 @@ if(produit.getAdresse()!=null)
         pointLumineux.setTemperature(p.getTemperature());
         pointLumineux.setClass_electrique(p.getClass_electrique());
         pointLumineux.setDate_accussition(p.getDate_accussition());
+        adresse=p.getAdresse();
+        coordonnees=p.getCoordonnees();
+        AdressRepository.save(adresse);
+        CoordonnesRepository.save(coordonnees);
         PointLumineuxRepository.save(pointLumineux);
     }
 }

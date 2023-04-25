@@ -3,8 +3,10 @@ package com.example.demo.coordonnees;
 import com.example.demo.PointLumineux.PointLumineux;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
-public class Coordonnees {
+public class Coordonnees implements Serializable {
     @Id
     @SequenceGenerator(
             name = "Adresse_sequence",
@@ -20,7 +22,7 @@ public class Coordonnees {
     private float x;
     private float y;
 
-    @OneToOne()
+   /* @OneToOne()
     private PointLumineux pointLumineux;
 
     public PointLumineux getPointLumineux() {
@@ -29,7 +31,7 @@ public class Coordonnees {
 
     public void setPointLumineux(PointLumineux pointLumineux) {
         this.pointLumineux = pointLumineux;
-    }
+    }*/
 
     public Long getId() {
         return id;

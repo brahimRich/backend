@@ -3,13 +3,15 @@ package com.example.demo.PointLumineux;
 
 import com.example.demo.Adresse.Adresse;
 import com.example.demo.coordonnees.Coordonnees;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name ="pointlumineux")
-public class PointLumineux {
+public class PointLumineux implements Serializable {
     @Id
     @SequenceGenerator(
             name = "PointLumineux_sequence",
@@ -37,7 +39,7 @@ public class PointLumineux {
     @OneToOne()
     private Coordonnees coordonnees;
 
-    @ManyToOne
+    @OneToOne
     private Adresse adresse;
 
     public Coordonnees getCoordonnees() {
@@ -113,7 +115,8 @@ public class PointLumineux {
     }
 
     public PointLumineux() {
-
+        adresse=new Adresse();
+        coordonnees=new Coordonnees();
     }
 
     public Long getReference() {
@@ -124,11 +127,13 @@ public class PointLumineux {
         this.reference = reference;
     }
 
-    public PointLumineux(String type, double longitude, double latitude) {
+    public PointLumineux(String type, double longitude, double latitude,Adresse a, Coordonnees c) {
         this.type = type;
         this.longitude = longitude;
         this.latitude = latitude;
         this.allume = false; // Le point lumineux est éteint par défaut
+        this.adresse=a;
+        this.coordonnees=c;
     }
 
     public String getType() {
