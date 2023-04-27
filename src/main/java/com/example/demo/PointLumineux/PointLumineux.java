@@ -2,12 +2,15 @@ package com.example.demo.PointLumineux;
 
 
 import com.example.demo.Adresse.Adresse;
+import com.example.demo.Armoire.Armoire;
+import com.example.demo.Intervention.Intervention;
 import com.example.demo.coordonnees.Coordonnees;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name ="pointlumineux")
@@ -41,6 +44,30 @@ public class PointLumineux implements Serializable {
 
     @OneToOne
     private Adresse adresse;
+
+    //Intervention
+    @OneToMany
+    private List<Intervention> InterventionList;
+
+    public List<Intervention> getInterventionList() {
+        return InterventionList;
+    }
+
+    public void setPointLumineuxList(List<Intervention> InterventionList) {
+        this.InterventionList = InterventionList;
+    }
+
+    //Armoire
+    @ManyToOne
+    private Armoire armoire;
+
+    public Armoire getArmoire() {
+        return armoire;
+    }
+
+    public void setArmoire(Armoire armoire) {
+        this.armoire = armoire;
+    }
 
     public Coordonnees getCoordonnees() {
         return coordonnees;
@@ -127,6 +154,19 @@ public class PointLumineux implements Serializable {
         this.reference = reference;
     }
 
+    public PointLumineux(String type, double longitude, double latitude,Adresse a, Coordonnees c,Armoire armoire,List<Intervention> interventions) {
+        this.InterventionList = interventions;
+        this.armoire = armoire;
+        this.type = type;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.allume = false; // Le point lumineux est éteint par défaut
+        this.adresse=a;
+        this.coordonnees=c;
+    }
+
+
+    //constructeur temporaire
     public PointLumineux(String type, double longitude, double latitude,Adresse a, Coordonnees c) {
         this.type = type;
         this.longitude = longitude;
@@ -176,4 +216,7 @@ public class PointLumineux implements Serializable {
     public void eteindre() {
         this.allume = false;
     }
+
+
+
 }

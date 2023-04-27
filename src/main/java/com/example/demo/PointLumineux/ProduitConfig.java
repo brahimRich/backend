@@ -21,7 +21,9 @@ public class ProduitConfig {
             adressRepository.save(a);
             coordonnesRepository.save(c);
             PointLumineux p1 = new PointLumineux("Brahim",12.2,16.2,a,c);
+            PointLumineux p2 = new PointLumineux("Rida",22.7,2.2,a,c);
             pointLumineuxRepository.save(p1);
+            pointLumineuxRepository.save(p2);
         };
     }
 }
