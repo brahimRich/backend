@@ -3,12 +3,13 @@ package com.example.demo.PointLumineux;
 
 import com.example.demo.Adresse.Adresse;
 import com.example.demo.Armoire.Armoire;
+import com.example.demo.Armoire.ArmoireCaracteristique;
 import com.example.demo.Intervention.Intervention;
 import com.example.demo.coordonnees.Coordonnees;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -46,8 +47,8 @@ public class PointLumineux implements Serializable {
     private Adresse adresse;
 
     //Intervention
-    @OneToMany
-    private List<Intervention> InterventionList;
+    @ManyToMany
+    private List<Intervention> InterventionList=new ArrayList<>();
 
     public List<Intervention> getInterventionList() {
         return InterventionList;
@@ -154,7 +155,7 @@ public class PointLumineux implements Serializable {
         this.reference = reference;
     }
 
-    public PointLumineux(String type, double longitude, double latitude,Adresse a, Coordonnees c,Armoire armoire,List<Intervention> interventions) {
+    public PointLumineux(String type, double longitude, double latitude, Adresse a, Coordonnees c, Armoire armoire, List<Intervention> interventions) {
         this.InterventionList = interventions;
         this.armoire = armoire;
         this.type = type;

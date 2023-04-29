@@ -2,6 +2,7 @@ package com.example.demo.Intervention;
 
 import java.util.Date;
 import com.example.demo.PointLumineux.PointLumineux;
+import com.example.demo.Technicienne.Technicienne;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -28,24 +29,34 @@ public class Intervention {
 
     private String intitule_Intervention;
 
-    private String nom_Intervenant;
-
     private int dure_Intervention;
 
     private float etat_intervention;
 
-    private int Id_pt_limineux;
-
-    private int id_intervenant;
-
     @OneToMany
+    private List<Technicienne> techniciennes;
+
+    @ManyToMany
     private List<PointLumineux> pointLumineuxList;
+
     public List<PointLumineux> getPointLumineuxList() {
         return pointLumineuxList;
     }
 
     public void setPointLumineuxList(List<PointLumineux> pointLumineuxList) {
         this.pointLumineuxList = pointLumineuxList;
+    }
+
+    public void setId_Intervention(long id_Intervention) {
+        Id_Intervention = id_Intervention;
+    }
+
+    public List<Technicienne> getTechniciennes() {
+        return techniciennes;
+    }
+
+    public void setTechniciennes(List<Technicienne> techniciennes) {
+        this.techniciennes = techniciennes;
     }
 
     // Constructeur par défaut
@@ -55,16 +66,14 @@ public class Intervention {
     public Intervention(int id_Intervention, Date date_intervention, String type,
                         String intitule_Intervention, String nom_Intervenant,
                         int dure_Intervention, float etat_intervention,
-                        int id_pt_limineux, int id_intervenant,List<PointLumineux> pointLumineuxList) {
+                        int id_pt_limineux, int id_intervenant,List<PointLumineux> pointLumineuxList,List<Technicienne> techniciennes) {
         this.pointLumineuxList = pointLumineuxList;
         this.Date_intervention = date_intervention;
         this.type = type;
         this.intitule_Intervention = intitule_Intervention;
-        this.nom_Intervenant = nom_Intervenant;
         this.dure_Intervention = dure_Intervention;
         this.etat_intervention = etat_intervention;
-        Id_pt_limineux = id_pt_limineux;
-        this.id_intervenant = id_intervenant;
+        this.techniciennes = techniciennes;
     }
 
     public long getId_Intervention() {
@@ -99,13 +108,6 @@ public class Intervention {
         this.intitule_Intervention = intitule_Intervention;
     }
 
-    public String getNom_Intervenant() {
-        return nom_Intervenant;
-    }
-
-    public void setNom_Intervenant(String nom_Intervenant) {
-        this.nom_Intervenant = nom_Intervenant;
-    }
 
     public int getDure_Intervention() {
         return dure_Intervention;
@@ -121,22 +123,6 @@ public class Intervention {
 
     public void setEtat_intervention(float etat_intervention) {
         this.etat_intervention = etat_intervention;
-    }
-
-    public int getId_pt_limineux() {
-        return Id_pt_limineux;
-    }
-
-    public void setId_pt_limineux(int id_pt_limineux) {
-        Id_pt_limineux = id_pt_limineux;
-    }
-
-    public int getId_intervenant() {
-        return id_intervenant;
-    }
-
-    public void setId_intervenant(int id_intervenant) {
-        this.id_intervenant = id_intervenant;
     }
 
 
