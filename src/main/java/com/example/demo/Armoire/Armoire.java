@@ -23,16 +23,12 @@ public class Armoire {
     @ManyToMany
     private List<ArmoireCaracteristique> ArmoireListe=new ArrayList<>();
 
-    @ManyToMany
-    private List<TypeArmoire> typeArmoireList=new ArrayList<>();
 
-    @OneToOne
-    private Departt departt;
 
-    public Armoire(List<ArmoireCaracteristique> armoireListe, List<TypeArmoire> typeArmoireList, Departt departt) {
+
+
+    public Armoire(List<ArmoireCaracteristique> armoireListe, List<TypeArmoire> typeArmoireList) {
         ArmoireListe = armoireListe;
-        this.typeArmoireList = typeArmoireList;
-        this.departt = departt;
     }
 
     public Armoire() {
@@ -54,20 +50,7 @@ public class Armoire {
         ArmoireListe = armoireListe;
     }
 
-    public List<TypeArmoire> getTypeArmoireList() {
-        return typeArmoireList;
-    }
 
-    public void setTypeArmoireList(List<TypeArmoire> typeArmoireList) {
-        this.typeArmoireList = typeArmoireList;
-    }
 
-    public Departt getDepartt() {
-        return departt;
-    }
-
-    public void setDepartt(Departt departt) {
-        this.departt = departt;
-    }
 }
 

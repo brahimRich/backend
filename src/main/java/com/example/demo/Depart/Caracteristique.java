@@ -28,10 +28,21 @@ public class Caracteristique {
     @ManyToOne
     private Departt derpar;
 
+    @OneToOne
+    private DepartType departType ;
+
+    public DepartType getDepartType() {
+        return departType;
+    }
+
+    public void setDepartType(DepartType departType) {
+        this.departType = departType;
+    }
+
     public Caracteristique() {
     }
 
-    public Caracteristique(String tenstion_sortie_triphase, String tenstion_sortie_mono, String courantA, String tenstion_extrimite_triphase, String tenstion_extrimite_mono, String nbr_lumineux, Departt derpar) {
+    public Caracteristique(String tenstion_sortie_triphase, String tenstion_sortie_mono, String courantA, String tenstion_extrimite_triphase, String tenstion_extrimite_mono, String nbr_lumineux, Departt derpar,DepartType departType) {
         this.tenstion_sortie_triphase = tenstion_sortie_triphase;
         this.tenstion_sortie_mono = tenstion_sortie_mono;
         this.courantA = courantA;
@@ -39,6 +50,7 @@ public class Caracteristique {
         this.tenstion_extrimite_mono = tenstion_extrimite_mono;
         this.nbr_lumineux = nbr_lumineux;
         this.derpar = derpar;
+        this.departType=departType;
     }
 
     public Long getId() {

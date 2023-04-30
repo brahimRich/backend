@@ -3,7 +3,9 @@ package com.example.demo.Technicienne;
 import com.example.demo.Intervention.Intervention;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Technicienne {
@@ -22,8 +24,8 @@ public class Technicienne {
     private String prenom;
     private String cin;
 
-    @ManyToOne
-    private Technicienne technicienne;
+    @ManyToMany
+    private List<Intervention> interventionList=new ArrayList<>();
 
     public Technicienne(String nom, String prenom, String cin) {
         this.nom = nom;
@@ -64,5 +66,13 @@ public class Technicienne {
 
     public void setCin(String cin) {
         this.cin = cin;
+    }
+
+    public List<Intervention> getInterventionList() {
+        return interventionList;
+    }
+
+    public void setInterventionList(List<Intervention> interventionList) {
+        this.interventionList = interventionList;
     }
 }

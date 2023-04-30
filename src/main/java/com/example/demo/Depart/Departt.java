@@ -1,5 +1,6 @@
 package com.example.demo.Depart;
 
+import com.example.demo.Armoire.Armoire;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -20,18 +21,28 @@ public class Departt {
     private Long id;
     private String Observation;
 
-    @ManyToMany
-    private List<DepartType> departTypeList ;
+   /* @ManyToMany
+    private List<DepartType> departTypeList ;*/
 
     @OneToMany
     private List<Caracteristique> caracteristiqueList;
+
+    @OneToOne
+    private Armoire armoire;
+
+    public Armoire getArmoire() {
+        return armoire;
+    }
+
+    public void setArmoire(Armoire armoire) {
+        this.armoire = armoire;
+    }
 
     public Departt() {
     }
 
     public Departt(String observation, List<DepartType> departTypeList, List<Caracteristique> caracteristiqueList) {
         Observation = observation;
-        this.departTypeList = departTypeList;
         this.caracteristiqueList = caracteristiqueList;
     }
 
@@ -51,13 +62,13 @@ public class Departt {
         Observation = observation;
     }
 
-    public List<DepartType> getDepartTypeList() {
+    /*public List<DepartType> getDepartTypeList() {
         return departTypeList;
     }
 
     public void setDepartTypeList(List<DepartType> departTypeList) {
         this.departTypeList = departTypeList;
-    }
+    }*/
 
     public List<Caracteristique> getCaracteristiqueList() {
         return caracteristiqueList;

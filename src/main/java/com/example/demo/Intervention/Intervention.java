@@ -21,7 +21,7 @@ public class Intervention {
             strategy = GenerationType.SEQUENCE,
             generator = "Intervention_sequence"
     )
-    private long Id_Intervention;
+    private Long Id_Intervention;
 
     private Date Date_intervention;
 
@@ -63,10 +63,9 @@ public class Intervention {
     public Intervention() {}
 
     // Constructeur avec paramètres
-    public Intervention(int id_Intervention, Date date_intervention, String type,
-                        String intitule_Intervention, String nom_Intervenant,
-                        int dure_Intervention, float etat_intervention,
-                        int id_pt_limineux, int id_intervenant,List<PointLumineux> pointLumineuxList,List<Technicienne> techniciennes) {
+    public Intervention( Date date_intervention, String type,
+                        String intitule_Intervention,
+                        int dure_Intervention, float etat_intervention, List<PointLumineux> pointLumineuxList,List<Technicienne> techniciennes) {
         this.pointLumineuxList = pointLumineuxList;
         this.Date_intervention = date_intervention;
         this.type = type;
@@ -76,11 +75,11 @@ public class Intervention {
         this.techniciennes = techniciennes;
     }
 
-    public long getId_Intervention() {
+    public Long getId_Intervention() {
         return Id_Intervention;
     }
 
-    public void setId_Intervention(int id_Intervention) {
+    public void setId_Intervention(Long id_Intervention) {
         this.Id_Intervention = id_Intervention;
     }
 
@@ -107,7 +106,6 @@ public class Intervention {
     public void setIntitule_Intervention(String intitule_Intervention) {
         this.intitule_Intervention = intitule_Intervention;
     }
-
 
     public int getDure_Intervention() {
         return dure_Intervention;

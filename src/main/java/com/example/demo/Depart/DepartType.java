@@ -20,13 +20,13 @@ public class DepartType {
     private double num_depart;
     private String typedepart;
 
-    @ManyToMany
-    private List<Departt> departtList ;
+    /*@ManyToMany
+    private List<Departt> departtList ;*/
 
     public DepartType(double num_depart, String typedepart, List<Departt> departtList) {
         this.num_depart = num_depart;
         this.typedepart = typedepart;
-        this.departtList = departtList;
+        //this.departtList = departtList;
     }
 
     public DepartType() {
@@ -56,11 +56,11 @@ public class DepartType {
         this.typedepart = typedepart;
     }
 
-    public List<Departt> getDeparttList() {
+    /*public List<Departt> getDeparttList() {
         return departtList;
     }
 
     public void setDeparttList(List<Departt> departtList) {
         this.departtList = departtList;
-    }
+    }*/
 }

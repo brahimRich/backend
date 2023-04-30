@@ -24,14 +24,26 @@ public class ArmoireCaracteristique {
     private String calibre;
     private int nombre;
 
-    @ManyToMany
-    private List<Armoire> armoireList=new ArrayList<>();
+   /* @ManyToMany
+    private List<Armoire> armoireList=new ArrayList<>();*/
 
-    public ArmoireCaracteristique(String marque, String calibre, int nombre, List<Armoire> armoireList) {
+    @ManyToOne
+    private TypeArmoire typeArmoire;
+
+    public TypeArmoire getTypeArmoire() {
+        return typeArmoire;
+    }
+
+    public void setTypeArmoire(TypeArmoire typeArmoire) {
+        this.typeArmoire = typeArmoire;
+    }
+
+    public ArmoireCaracteristique(String marque, String calibre, int nombre, TypeArmoire typeArmoire) {
         this.marque = marque;
         this.calibre = calibre;
         this.nombre = nombre;
-        this.armoireList = armoireList;
+       // this.armoireList = armoireList;
+        this.typeArmoire=typeArmoire;
     }
 
     public ArmoireCaracteristique() {
@@ -69,11 +81,11 @@ public class ArmoireCaracteristique {
         this.nombre = nombre;
     }
 
-    public List<Armoire> getArmoireList() {
+   /* public List<Armoire> getArmoireList() {
         return armoireList;
     }
 
     public void setArmoireList(List<Armoire> armoireList) {
         this.armoireList = armoireList;
-    }
+    }*/
 }
