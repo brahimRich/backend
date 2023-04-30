@@ -95,7 +95,7 @@ public class DepartConfig {
             lcd.add(caracteristique);
 
 
-            Departt departt=new Departt("je observe",ltd,lcd);
+            Departt departt=new Departt("je observe",armoire,lcd);
 
             departRepository.save(departt);
 

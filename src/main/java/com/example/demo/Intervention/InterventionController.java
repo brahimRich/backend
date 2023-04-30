@@ -21,6 +21,7 @@ public class InterventionController {
     public List<Intervention> getpointLumineux() {
         return interventionService.getallIntervention();
     }
+
     @PostMapping("/add")
     public void addpointLumineux(@RequestBody Intervention iner) throws IllegalAccessException {
         interventionService.addIntervention(iner);

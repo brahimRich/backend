@@ -25,8 +25,8 @@ public class Caracteristique {
     private  String tenstion_extrimite_mono ;
     private String nbr_lumineux;
 
-    @ManyToOne
-    private Departt derpar;
+    /*@ManyToOne
+    private Departt derpar;*/
 
     @OneToOne
     private DepartType departType ;
@@ -49,7 +49,7 @@ public class Caracteristique {
         this.tenstion_extrimite_triphase = tenstion_extrimite_triphase;
         this.tenstion_extrimite_mono = tenstion_extrimite_mono;
         this.nbr_lumineux = nbr_lumineux;
-        this.derpar = derpar;
+        //this.derpar = derpar;
         this.departType=departType;
     }
 
@@ -109,11 +109,11 @@ public class Caracteristique {
         this.nbr_lumineux = nbr_lumineux;
     }
 
-    public Departt getDerpar() {
+   /* public Departt getDerpar() {
         return derpar;
     }
 
     public void setDerpar(Departt derpar) {
         this.derpar = derpar;
-    }
+    }*/
 }

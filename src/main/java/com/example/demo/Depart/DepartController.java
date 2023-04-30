@@ -22,20 +22,20 @@ public class DepartController {
         return departtService.getallDepart();
     }
     @PostMapping("/add")
-    public void addpointLumineux(@RequestBody Armoire iner) throws IllegalAccessException {
-        ///armoireService.addArmoire(iner);
+    public void addpointLumineux(@RequestBody Departt departt) throws IllegalAccessException {
+        departtService.addDepart(departt);
     }
 
     @DeleteMapping(value = "/delete/{reference}")
     public void deletepointLumineux(@PathVariable("reference") Long reference) throws IllegalAccessException {
-        //armoireService.deleteArmoire(reference);
+        departtService.deleteDepart(reference);
     }
 
     @PutMapping(value = "update/{reference}")
     public void updatepointLumineux(
             @PathVariable("reference") Long reference,
-            @RequestBody Armoire armoire
+            @RequestBody Departt departt
     ) throws IllegalAccessException {
-       // armoireService.updateArmoire(reference,armoire);
+       departtService.updateDepart(reference,departt);
     }
 }

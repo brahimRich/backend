@@ -41,9 +41,10 @@ public class Departt {
     public Departt() {
     }
 
-    public Departt(String observation, List<DepartType> departTypeList, List<Caracteristique> caracteristiqueList) {
+    public Departt(String observation,Armoire armoire , List<Caracteristique> caracteristiqueList) {
         Observation = observation;
         this.caracteristiqueList = caracteristiqueList;
+        this.armoire=armoire;
     }
 
     public Long getId() {

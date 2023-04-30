@@ -26,12 +26,11 @@ public class DeparttService {
     private final ArmoireServiceRepository armoireServiceRepository;
     private final ArmoireCaracteristiqueRepository armoireCaracteristiqueRepository;
     private final DepartRepository departRepository;
-
-
+    private final CaracteristiqueRepository caracteristiqueRepository;
 
 
     @Autowired
-    public DeparttService(PointLumineuxRepository PointLumineuxRepository, AdressRepository AdressRepository, CoordonnesRepository CoordonnesRepository, InterventionRepository interventionRepository, TechnicienneRepository technicienneRepository, ArmoireRepository armoireRepository, ArmoireServiceRepository armoireServiceRepository, ArmoireCaracteristiqueRepository armoireCaracteristiqueRepository,DepartRepository departRepository){
+    public DeparttService(PointLumineuxRepository PointLumineuxRepository, AdressRepository AdressRepository, CoordonnesRepository CoordonnesRepository, InterventionRepository interventionRepository, TechnicienneRepository technicienneRepository, ArmoireRepository armoireRepository, ArmoireServiceRepository armoireServiceRepository, ArmoireCaracteristiqueRepository armoireCaracteristiqueRepository,DepartRepository departRepository,CaracteristiqueRepository caracteristiqueRepository){
         this.PointLumineuxRepository = PointLumineuxRepository;
         this.AdressRepository=AdressRepository;
         this.CoordonnesRepository=CoordonnesRepository;
@@ -41,31 +40,35 @@ public class DeparttService {
         this.armoireServiceRepository=armoireServiceRepository;
         this.armoireCaracteristiqueRepository=armoireCaracteristiqueRepository;
         this.departRepository=departRepository;
+        this.caracteristiqueRepository=caracteristiqueRepository;
     }
 
     public List<Departt> getallDepart() {
         return departRepository.findAll();
     }
 
-    public void addArmoire(Departt departt) throws IllegalAccessException {
-
+    public void addDepart(Departt departt) throws IllegalAccessException {
+        caracteristiqueRepository.saveAll(departt.getCaracteristiqueList());
+        departRepository.save(departt);
     }
 
-    public void deleteArmoire(Long reference) throws IllegalAccessException {
+    public void deleteDepart(Long reference) throws IllegalAccessException {
         System.out.println("delete ************************************");
-        boolean b = armoireRepository.existsById(reference);
+        boolean b = departRepository.existsById(reference);
         if(!b){
             throw new IllegalAccessException("Produit with reference "+reference+" does not exists");
         }
-        armoireRepository.deleteById(reference);
+        departRepository.deleteById(reference);
     }
 
     @Transactional
-    public void updateArmoire(Long reference, Armoire p) throws IllegalAccessException {
+    public void updateDepart(Long reference, Departt p) throws IllegalAccessException {
         System.out.println("updatee ************************************ "+reference);
         Armoire armoire = armoireRepository.findById(reference).orElseThrow(()-> new IllegalArgumentException("point with reference "+reference+" does not exists"));
         //armoire.setTypeArmoireList(p.getTypeArmoireList());
-        armoire.setArmoireListe(p.getArmoireListe());
+        //armoire.setArmoireListe(p.getArmoireListe());
         //completer ***
     }
+
+
 }
