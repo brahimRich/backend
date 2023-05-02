@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 public class ArmoireConfig {
@@ -42,20 +43,62 @@ public class ArmoireConfig {
 
             TypeArmoire typeArmoire=new TypeArmoire("selectionneur",new ArrayList<>());
 
+            //typeArmoire.setId(1L);
+
             TypeArmoire typeArmoire2=new TypeArmoire("porte fusible",new ArrayList<>());
+
+            //typeArmoire2.setId(2L);
+
+            TypeArmoire typeArmoire3=new TypeArmoire("Repartiteur",new ArrayList<>());
+
+            //typeArmoire3.setId(3L);
+
+            TypeArmoire typeArmoire4=new TypeArmoire("Contacteur",new ArrayList<>());
+
+            //typeArmoire4.setId(4L);
+
+            TypeArmoire typeArmoire5=new TypeArmoire("Horloge",new ArrayList<>());
+
+            //typeArmoire5.setId(5L);
+
+            TypeArmoire typeArmoire6=new TypeArmoire("Disj uni C32",new ArrayList<>());
+
+            //typeArmoire6.setId(6L);
+
+            TypeArmoire typeArmoire7=new TypeArmoire("Bornes",new ArrayList<>());
+
+            //typeArmoire7.setId(7L);
+
+            TypeArmoire typeArmoire8=new TypeArmoire("Cablage",new ArrayList<>());
+
+            //typeArmoire8.setId(8L);
+
+           /* List<TypeArmoire> lta=new ArrayList<>();
+            lta.add(typeArmoire);
+            lta.add(typeArmoire2);
+            lta.add(typeArmoire3);
+            lta.add(typeArmoire4);
+            lta.add(typeArmoire5);
+            lta.add(typeArmoire6);
+            lta.add(typeArmoire7);
+            lta.add(typeArmoire8);
+
+
+            armoireServiceRepository.saveAll(lta);
 
 
             ArmoireCaracteristique armoireCaracteristique=new ArmoireCaracteristique("marque1","qualibre2",16,typeArmoire);
-
+            //armoireCaracteristique.setId(1L);
             ArmoireCaracteristique armoireCaracteristique2=new ArmoireCaracteristique("marque2","qualibre2",17,typeArmoire2);
+            //armoireCaracteristique2.setId(2L);
 
 //1
-            armoireServiceRepository.save(typeArmoire);
+           // armoireServiceRepository.save(typeArmoire);
 
             armoireCaracteristiqueRepository.save(armoireCaracteristique);
 //2
 
-            armoireServiceRepository.save(typeArmoire2);
+            //armoireServiceRepository.save(typeArmoire2);
 
             armoireCaracteristiqueRepository.save(armoireCaracteristique2);
 
@@ -75,6 +118,8 @@ public class ArmoireConfig {
             p2.setArmoire(armoire);
 
             pointLumineuxRepository.save(p2);
+*/
+// ajout de donner require
 
 
 

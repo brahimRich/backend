@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ArmoireService {
@@ -43,10 +45,20 @@ public class ArmoireService {
     }
 
     public void addArmoire(Armoire armoire) throws IllegalAccessException {
-        //armoireServiceRepository.saveAll(armoire.getTypeArmoireList());
-        armoireCaracteristiqueRepository.saveAll(armoire.getArmoireListe());
-        armoireRepository.save(armoire);
+        Armoire newArmoire = new Armoire();
+
+        for (ArmoireCaracteristique armoireCaracteristique : armoire.getArmoireListe()) {
+            armoireCaracteristique.setTypeArmoire(armoireCaracteristique.getTypeArmoire());
+            System.out.println("id************************* "+armoireCaracteristique.getTypeArmoire().getId());
+            armoireServiceRepository.save(armoireCaracteristique.getTypeArmoire());
+            newArmoire.getArmoireListe().add(armoireCaracteristique);
+            armoireCaracteristiqueRepository.save(armoireCaracteristique);
+        }
+
+       armoireRepository.save(newArmoire);
+
     }
+
 
     public void deleteArmoire(Long reference) throws IllegalAccessException {
         System.out.println("delete ************************************");

@@ -11,13 +11,13 @@ public class ArmoireCaracteristique {
 
     @Id
     @SequenceGenerator(
-            name = "Armoire_sequence",
-            sequenceName = "Armoire_sequence",
+            name = "ArmoireCaracteristique_sequence",
+            sequenceName = "ArmoireCaracteristique_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "Armoire_sequence"
+            generator = "ArmoireCaracteristique_sequence"
     )
     private Long id;
     private String marque;

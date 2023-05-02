@@ -52,7 +52,7 @@ public class DepartConfig {
             ArmoireCaracteristique armoireCaracteristique2=new ArmoireCaracteristique("marque2","qualibre2",17,typeArmoire2);
 
 //1
-            armoireServiceRepository.save(typeArmoire);
+           /* armoireServiceRepository.save(typeArmoire);
 
             armoireCaracteristiqueRepository.save(armoireCaracteristique);
 //2
@@ -98,7 +98,7 @@ public class DepartConfig {
             Departt departt=new Departt("je observe",armoire,lcd);
 
             departRepository.save(departt);
-
+*/
         };
     }
 }
