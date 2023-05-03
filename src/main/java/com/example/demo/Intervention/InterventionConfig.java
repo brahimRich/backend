@@ -35,8 +35,8 @@ public class InterventionConfig {
             ArrayList<Technicienne> techniciennes=new ArrayList<>();
             techniciennes.add(t);
 
-            Intervention intervention=new Intervention(null,"type","intetulle",15,0,lp,techniciennes);
-            interventionRepository.save(intervention);
+            /*Intervention intervention=new Intervention(null,"type","intetulle",15,0,lp,techniciennes);
+            interventionRepository.save(intervention);*/
 
         };
     }

@@ -4,6 +4,7 @@ import com.example.demo.Adresse.AdressRepository;
 import com.example.demo.Adresse.Adresse;
 import com.example.demo.PointLumineux.PointLumineux;
 import com.example.demo.PointLumineux.PointLumineuxRepository;
+import com.example.demo.Technicienne.Technicienne;
 import com.example.demo.Technicienne.TechnicienneRepository;
 import com.example.demo.coordonnees.Coordonnees;
 import com.example.demo.coordonnees.CoordonnesRepository;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,8 +39,20 @@ public class InterventionService {
     }
 
     public void addIntervention(Intervention intervention) throws IllegalAccessException {
+        if (intervention.getPointLumineuxList() == null) {
+            intervention.setPointLumineuxList(new ArrayList<>());
+        }
+        boolean b = PointLumineuxRepository.existsById(intervention.getPointLumineuxList().get(0).getReference());
+        if(!b){
+            System.out.println("********************Produit with reference "+intervention.getPointLumineuxList().get(0).getReference()+" does not exists");
+        }else{
+            System.out.println("*******************************************");
+
+        }
+        Intervention inte = new Intervention(intervention.getDate_intervention(), intervention.getType(), intervention.getIntitule_Intervention(),
+                intervention.getDure_Intervention(), intervention.getEtat_intervention(), intervention.getPointLumineuxList(), intervention.getTechniciennes());
         interventionRepository.save(intervention);
-        //ajouter a la liste des intervetion des technisienne *****
+        System.out.println("*******************************************"+inte.getId_Intervention());
     }
 
     public void deleteInertvention(Long reference) throws IllegalAccessException {

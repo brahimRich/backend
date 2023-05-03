@@ -73,7 +73,7 @@ public class ArmoireConfig {
 
             //typeArmoire8.setId(8L);
 
-           /* List<TypeArmoire> lta=new ArrayList<>();
+            List<TypeArmoire> lta=new ArrayList<>();
             lta.add(typeArmoire);
             lta.add(typeArmoire2);
             lta.add(typeArmoire3);
@@ -118,7 +118,7 @@ public class ArmoireConfig {
             p2.setArmoire(armoire);
 
             pointLumineuxRepository.save(p2);
-*/
+
 // ajout de donner require
 
 

@@ -33,7 +33,7 @@ public class Intervention {
 
     private float etat_intervention;
 
-    @OneToMany
+    @ManyToMany
     private List<Technicienne> techniciennes;
 
     @ManyToMany

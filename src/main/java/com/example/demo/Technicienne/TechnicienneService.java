@@ -36,8 +36,9 @@ public class TechnicienneService {
         boolean b = technicienneRepository.existsById(reference);
         if(!b){
             throw new IllegalAccessException("Produit with reference "+reference+" does not exists");
+        }else{
+            technicienneRepository.deleteById(reference);
         }
-        technicienneRepository.deleteById(reference);
     }
 
     @Transactional

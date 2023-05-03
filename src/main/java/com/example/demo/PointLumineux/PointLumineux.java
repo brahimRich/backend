@@ -46,7 +46,7 @@ public class PointLumineux implements Serializable {
     @OneToOne
     private Adresse adresse;
 
-    //Intervention
+    /*//Intervention
     @ManyToMany
     private List<Intervention> InterventionList=new ArrayList<>();
 
@@ -57,7 +57,7 @@ public class PointLumineux implements Serializable {
     public void setPointLumineuxList(List<Intervention> InterventionList) {
         this.InterventionList = InterventionList;
     }
-
+*/
     //Armoire
     @ManyToOne
     private Armoire armoire;
@@ -156,7 +156,7 @@ public class PointLumineux implements Serializable {
     }
 
     public PointLumineux(String type, double longitude, double latitude, Adresse a, Coordonnees c, Armoire armoire, List<Intervention> interventions) {
-        this.InterventionList = interventions;
+        //this.InterventionList = interventions;
         this.armoire = armoire;
         this.type = type;
         this.longitude = longitude;

@@ -24,7 +24,7 @@ public class Departt {
    /* @ManyToMany
     private List<DepartType> departTypeList ;*/
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Caracteristique> caracteristiqueList;
 
     @OneToOne

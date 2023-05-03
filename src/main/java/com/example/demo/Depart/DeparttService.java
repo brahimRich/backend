@@ -1,10 +1,7 @@
 package com.example.demo.Depart;
 
 import com.example.demo.Adresse.AdressRepository;
-import com.example.demo.Armoire.Armoire;
-import com.example.demo.Armoire.ArmoireCaracteristiqueRepository;
-import com.example.demo.Armoire.ArmoireRepository;
-import com.example.demo.Armoire.ArmoireServiceRepository;
+import com.example.demo.Armoire.*;
 import com.example.demo.Intervention.InterventionRepository;
 import com.example.demo.PointLumineux.PointLumineuxRepository;
 import com.example.demo.Technicienne.TechnicienneRepository;
@@ -27,10 +24,11 @@ public class DeparttService {
     private final ArmoireCaracteristiqueRepository armoireCaracteristiqueRepository;
     private final DepartRepository departRepository;
     private final CaracteristiqueRepository caracteristiqueRepository;
+    private final TypeRepository typeRepository;
 
 
     @Autowired
-    public DeparttService(PointLumineuxRepository PointLumineuxRepository, AdressRepository AdressRepository, CoordonnesRepository CoordonnesRepository, InterventionRepository interventionRepository, TechnicienneRepository technicienneRepository, ArmoireRepository armoireRepository, ArmoireServiceRepository armoireServiceRepository, ArmoireCaracteristiqueRepository armoireCaracteristiqueRepository,DepartRepository departRepository,CaracteristiqueRepository caracteristiqueRepository){
+    public DeparttService(PointLumineuxRepository PointLumineuxRepository, AdressRepository AdressRepository, CoordonnesRepository CoordonnesRepository, InterventionRepository interventionRepository, TechnicienneRepository technicienneRepository, ArmoireRepository armoireRepository, ArmoireServiceRepository armoireServiceRepository, ArmoireCaracteristiqueRepository armoireCaracteristiqueRepository,DepartRepository departRepository,CaracteristiqueRepository caracteristiqueRepository,TypeRepository typeRepository){
         this.PointLumineuxRepository = PointLumineuxRepository;
         this.AdressRepository=AdressRepository;
         this.CoordonnesRepository=CoordonnesRepository;
@@ -41,6 +39,7 @@ public class DeparttService {
         this.armoireCaracteristiqueRepository=armoireCaracteristiqueRepository;
         this.departRepository=departRepository;
         this.caracteristiqueRepository=caracteristiqueRepository;
+        this.typeRepository=typeRepository;
     }
 
     public List<Departt> getallDepart() {
@@ -48,7 +47,14 @@ public class DeparttService {
     }
 
     public void addDepart(Departt departt) throws IllegalAccessException {
-        caracteristiqueRepository.saveAll(departt.getCaracteristiqueList());
+        System.out.println("add depart-----------------------------");
+        for (Caracteristique caracteristique : departt.getCaracteristiqueList()) {
+            //if not existe
+            DepartType departType  = typeRepository.findTypeByName(caracteristique.getDepartType().getTypedepart());
+            if(departType!=null) caracteristique.setDepartType(departType);
+            else typeRepository.save(caracteristique.getDepartType());
+            caracteristiqueRepository.save(caracteristique);
+        }
         departRepository.save(departt);
     }
 
@@ -60,15 +66,32 @@ public class DeparttService {
         }
         departRepository.deleteById(reference);
     }
+    public void saveOrUpdateCaracteristique(Caracteristique c) {
+        DepartType departType = typeRepository.findTypeByName(c.getDepartType().getTypedepart());
+        if (departType == null) {
+            if (c.getDepartType() != null) {
+                typeRepository.save(c.getDepartType()); // Save the DepartType instance first
+            }
+        } else {
+            c.setDepartType(departType);
+        }
+        caracteristiqueRepository.save(c); // Then save the Caracteristique instance
+    }
 
     @Transactional
-    public void updateDepart(Long reference, Departt p) throws IllegalAccessException {
-        System.out.println("updatee ************************************ "+reference);
-        Armoire armoire = armoireRepository.findById(reference).orElseThrow(()-> new IllegalArgumentException("point with reference "+reference+" does not exists"));
-        //armoire.setTypeArmoireList(p.getTypeArmoireList());
-        //armoire.setArmoireListe(p.getArmoireListe());
-        //completer ***
+    public void updateDepart(Long reference, Departt p) throws IllegalArgumentException {
+        System.out.println("update ************************************ " + reference);
+        Departt departt = departRepository.findById(reference)
+                .orElseThrow(() -> new IllegalArgumentException("depart with reference " + reference + " does not exist"));
+        departt.setCaracteristiqueList(p.getCaracteristiqueList());
+        departt.setArmoire(p.getArmoire());
+        departt.setObservation(p.getObservation());
+        for (Caracteristique caracteristique : departt.getCaracteristiqueList()) {
+            this.saveOrUpdateCaracteristique(caracteristique);
+        }
+        departRepository.save(departt);
     }
+
 
 
 }

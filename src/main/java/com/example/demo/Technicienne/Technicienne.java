@@ -24,9 +24,9 @@ public class Technicienne {
     private String prenom;
     private String cin;
 
-    @ManyToMany
+    /*@ManyToMany
     private List<Intervention> interventionList=new ArrayList<>();
-
+*/
     public Technicienne(String nom, String prenom, String cin) {
         this.nom = nom;
         this.prenom = prenom;
@@ -68,11 +68,11 @@ public class Technicienne {
         this.cin = cin;
     }
 
-    public List<Intervention> getInterventionList() {
+    /*public List<Intervention> getInterventionList() {
         return interventionList;
     }
 
     public void setInterventionList(List<Intervention> interventionList) {
         this.interventionList = interventionList;
-    }
+    }*/
 }
