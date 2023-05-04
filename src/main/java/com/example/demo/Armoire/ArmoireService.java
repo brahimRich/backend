@@ -75,6 +75,9 @@ public class ArmoireService {
         Armoire armoire = armoireRepository.findById(reference).orElseThrow(()-> new IllegalArgumentException("point with reference "+reference+" does not exists"));
         //armoire.setTypeArmoireList(p.getTypeArmoireList());
         armoire.setArmoireListe(p.getArmoireListe());
-        //completer ***
+        for (ArmoireCaracteristique armoireCaracteristique : p.getArmoireListe()) {
+            armoireCaracteristiqueRepository.save(armoireCaracteristique);
+        }
+        armoireRepository.save(armoire);
     }
 }

@@ -45,7 +45,9 @@ public class TechnicienneService {
     public void updateTechnicienne(Long reference, Technicienne t) throws IllegalAccessException {
         System.out.println("updatee ************************************ "+reference);
         Technicienne technicienne = technicienneRepository.findById(reference).orElseThrow(()-> new IllegalArgumentException("point with reference "+reference+" does not exists"));
-        technicienne=t;
+        technicienne.setCin(t.getCin());
+        technicienne.setNom(t.getNom());
+        technicienne.setPrenom(t.getPrenom());
         technicienneRepository.save(technicienne);
     }
 }
