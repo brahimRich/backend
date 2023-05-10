@@ -39,7 +39,7 @@ public class InterventionService {
     }
 
     public void addIntervention(Intervention intervention) throws IllegalAccessException {
-        if (intervention.getPointLumineuxList() == null) {
+        /*if (intervention.getPointLumineuxList() == null) {
             intervention.setPointLumineuxList(new ArrayList<>());
         }
         boolean b = PointLumineuxRepository.existsById(intervention.getPointLumineuxList().get(0).getReference());
@@ -52,7 +52,7 @@ public class InterventionService {
         Intervention inte = new Intervention(intervention.getDate_intervention(), intervention.getType(), intervention.getIntitule_Intervention(),
                 intervention.getDure_Intervention(), intervention.getEtat_intervention(), intervention.getPointLumineuxList(), intervention.getTechniciennes());
         interventionRepository.save(intervention);
-        System.out.println("*******************************************"+inte.getId_Intervention());
+        System.out.println("*******************************************"+intervention.getId_Intervention());*/
     }
 
     public void deleteInertvention(Long reference) throws IllegalAccessException {

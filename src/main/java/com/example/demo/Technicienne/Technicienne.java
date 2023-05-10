@@ -1,11 +1,6 @@
 package com.example.demo.Technicienne;
 
-import com.example.demo.Intervention.Intervention;
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Technicienne {
@@ -23,20 +18,45 @@ public class Technicienne {
     private String nom;
     private String prenom;
     private String cin;
+    private String email;
+    private String password;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     /*@ManyToMany
-    private List<Intervention> interventionList=new ArrayList<>();
-*/
+        private List<Intervention> interventionList=new ArrayList<>();
+    */
     public Technicienne(String nom, String prenom, String cin) {
         this.nom = nom;
         this.prenom = prenom;
         this.cin = cin;
+        this.email="brahim";
+        this.password="rich";
     }
 
     public Technicienne() {
     }
 
-    public long getId() {
+    public String getIdc() {
+        String numberString = String.valueOf(id);
+        return numberString;
+    }
+
+    public Long getId() {
         return id;
     }
 
