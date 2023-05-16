@@ -1,14 +1,11 @@
 package com.example.demo.Notifier.nofireF.model;
 
-import com.example.demo.Intervention.Intervention;
 import com.example.demo.Technicienne.Technicienne;
-import com.google.api.client.util.DateTime;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-
 @Entity
-public class Notification {
+public class NotificationReponce {
     @Id
     @SequenceGenerator(
             name = "Armoire_sequence",
@@ -26,49 +23,15 @@ public class Notification {
     private LocalDateTime createdAt;
     private String token;
 
-    @ManyToOne
-    private Technicienne technicienne;
+    @OneToOne
+    private Notification notification;
 
-
-    @ManyToOne
-    private Intervention intervention;
-
-
-    public Notification() {
-        createdAt = LocalDateTime.now();
+    public Notification getNotification() {
+        return notification;
     }
 
-    public Notification(String title, String message,String topic, Technicienne user,String token) {
-        this.title = title;
-        this.message = message;
-        this.technicienne = user;
-        this.createdAt = LocalDateTime.now();
-        this.topic=topic;
-        this.token=token;
-    }
-
-    public Intervention getIntervention() {
-        return intervention;
-    }
-
-    public void setIntervention(Intervention intervention) {
-        this.intervention = intervention;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
+    public void setNotification(Notification notification) {
+        this.notification = notification;
     }
 
     public Long getId() {
@@ -77,6 +40,14 @@ public class Notification {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     public String getTitle() {
@@ -103,11 +74,11 @@ public class Notification {
         this.createdAt = createdAt;
     }
 
-    public Technicienne getTechnicienne() {
-        return technicienne;
+    public String getToken() {
+        return token;
     }
 
-    public void setTechnicienne(Technicienne technicienne) {
-        this.technicienne = technicienne;
+    public void setToken(String token) {
+        this.token = token;
     }
 }

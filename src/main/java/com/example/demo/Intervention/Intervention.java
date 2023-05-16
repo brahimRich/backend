@@ -1,6 +1,8 @@
 package com.example.demo.Intervention;
 
 import java.util.Date;
+
+import com.example.demo.Admin.Admin;
 import com.example.demo.PointLumineux.PointLumineux;
 import com.example.demo.Technicienne.Technicienne;
 import jakarta.persistence.*;
@@ -29,18 +31,40 @@ public class Intervention {
 
     private String intitule_Intervention;
 
-    private int dure_Intervention;
+    private String dure_Intervention;
 
-    private float etat_intervention;
+    private String etat_intervention;
 
     @ManyToMany
     private List<Technicienne> techniciennes;
+
+    @OneToOne
+    private Technicienne completeur;
+
+    @ManyToOne
+    private Admin admin;
 
     @ManyToMany
     private List<PointLumineux> pointLumineuxList;
 
     public List<PointLumineux> getPointLumineuxList() {
         return pointLumineuxList;
+    }
+
+    public Technicienne getCompleteur() {
+        return completeur;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
+    public void setCompleteur(Technicienne completeur) {
+        this.completeur = completeur;
     }
 
     public void setPointLumineuxList(List<PointLumineux> pointLumineuxList) {
@@ -65,7 +89,7 @@ public class Intervention {
     // Constructeur avec paramètres
     public Intervention( Date date_intervention, String type,
                         String intitule_Intervention,
-                        int dure_Intervention, float etat_intervention, List<PointLumineux> pointLumineuxList,List<Technicienne> techniciennes) {
+                        String dure_Intervention, String etat_intervention, List<PointLumineux> pointLumineuxList,List<Technicienne> techniciennes,Admin admin) {
         this.pointLumineuxList = pointLumineuxList;
         this.Date_intervention = date_intervention;
         this.type = type;
@@ -73,6 +97,7 @@ public class Intervention {
         this.dure_Intervention = dure_Intervention;
         this.etat_intervention = etat_intervention;
         this.techniciennes = techniciennes;
+        this.admin=admin;
     }
 
     public Long getId_Intervention() {
@@ -107,19 +132,19 @@ public class Intervention {
         this.intitule_Intervention = intitule_Intervention;
     }
 
-    public int getDure_Intervention() {
+    public String getDure_Intervention() {
         return dure_Intervention;
     }
 
-    public void setDure_Intervention(int dure_Intervention) {
+    public void setDure_Intervention(String dure_Intervention) {
         this.dure_Intervention = dure_Intervention;
     }
 
-    public float getEtat_intervention() {
+    public String getEtat_intervention() {
         return etat_intervention;
     }
 
-    public void setEtat_intervention(float etat_intervention) {
+    public void setEtat_intervention(String etat_intervention) {
         this.etat_intervention = etat_intervention;
     }
 

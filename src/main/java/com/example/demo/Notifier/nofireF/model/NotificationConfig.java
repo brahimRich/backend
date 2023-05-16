@@ -15,10 +15,10 @@ public class NotificationConfig {
     @Bean
     CommandLineRunner commandLineRunnerNotification(TechnicienneRepository technicienneRepository,NotificationRepository notificationRepository){
         return args -> {
-            /*Technicienne t1=new Technicienne("rich notifier","brahim","cin");
+            Technicienne t1=new Technicienne("rich notifier","brahim","cin");
             technicienneRepository.save(t1);
             Notification notification=new Notification("titre b ","mesage b","topic",t1,"ff");
-            notificationRepository.save(notification);*/
+            notificationRepository.save(notification);
         };
     }
 }

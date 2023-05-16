@@ -38,7 +38,7 @@ public class ArmoireConfig {
             ArrayList<Technicienne> techniciennes=new ArrayList<>();
             techniciennes.add(t);
 
-            Intervention intervention=new Intervention(null,"type","intetulle",15,0,lp,techniciennes);
+            Intervention intervention=new Intervention(null,"type","intetulle","15","0",lp,techniciennes,null);
             interventionRepository.save(intervention);
 
             TypeArmoire typeArmoire=new TypeArmoire("selectionneur",new ArrayList<>());

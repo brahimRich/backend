@@ -3,6 +3,7 @@ package com.example.demo.Notifier.nofireF;
 import com.example.demo.Armoire.Armoire;
 import com.example.demo.Armoire.ArmoireService;
 import com.example.demo.Notifier.nofireF.model.Notification;
+import com.example.demo.Notifier.nofireF.model.NotificationReponce;
 import com.example.demo.Notifier.nofireF.model.NotificationService;
 import com.example.demo.Notifier.nofireF.model.PushNotificationResponse;
 import com.example.demo.Notifier.nofireF.servece.PushNotificationService;
@@ -24,6 +25,7 @@ import java.util.List;
 @RequestMapping(path ="api/notification")
 public class PushNotificationController {
     private final NotificationService notificationService;
+
 
     private Logger logger = LoggerFactory.getLogger(PushNotificationService.class);
 
@@ -56,10 +58,34 @@ public class PushNotificationController {
         return notificationService.getAllNotification();
     }
 
+    @GetMapping("/getAllR")
+    public List<NotificationReponce> getNotificationRe() {
+        return notificationService.getAllNotificationReponce();
+    }
+
     @GetMapping("/a")
     public ResponseEntity<List<com.example.demo.Notifier.nofireF.model.Notification>> getAllNotifications() {
         List<com.example.demo.Notifier.nofireF.model.Notification> notifications = notificationService.getAllNotification();
         return new ResponseEntity<>(notifications, HttpStatus.OK);
+    }
+
+    @PostMapping("/dataReponce")
+    public ResponseEntity sendDataNotificationRepnce(@RequestBody com.example.demo.Notifier.nofireF.model.NotificationReponce request) throws FirebaseMessagingException, IllegalAccessException {
+        pushNotificationService.sendPushNotificationReponce(request,request.getNotification().getTechnicienne().getIdc(), request.getNotification().getIntervention());
+        notificationService.addNotificationAdmin(request);
+        return new ResponseEntity<>(new PushNotificationResponse(HttpStatus.OK.value(), "Notification reponce has been sent."), HttpStatus.OK);
+    }
+
+    @PutMapping(value = "updatedataReponce/{reference}")
+    public void updateDataNotificationRepnce(@RequestBody com.example.demo.Notifier.nofireF.model.NotificationReponce request,@PathVariable("reference") Long reference) throws FirebaseMessagingException, IllegalAccessException {
+        pushNotificationService.sendPushNotificationReponce(request,request.getNotification().getTechnicienne().getIdc(), request.getNotification().getIntervention());
+        notificationService.updateNotificationAdmin(request,reference);
+    }
+
+    @PutMapping(value = "updatedata/{reference}")
+    public void updateDataNotification(@RequestBody com.example.demo.Notifier.nofireF.model.Notification request,@PathVariable("reference") Long reference) throws FirebaseMessagingException, IllegalAccessException {
+        pushNotificationService.sendPushNotification(request,request.getTechnicienne().getIdc(), request.getIntervention());
+        notificationService.updateNotification(request,reference);
     }
 
 }

@@ -44,6 +44,15 @@ public class FCMService {
         String response = sendAndGetResponse(message);
         logger.info("Sent message with data. Topic: " + request.getToken() + ", " + response+ " msg "+jsonOutput);
     }
+
+    public void sendMessageReponce(Map<String, String> data, com.example.demo.Notifier.nofireF.model.NotificationReponce request)
+            throws InterruptedException, ExecutionException {
+        Message message = getPreconfiguredMessageWithDataReponce(data, request);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String jsonOutput = gson.toJson(message);
+        String response = sendAndGetResponse(message);
+        logger.info("Sent message with data. Topic: " + request.getToken() + ", " + response+ " msg "+jsonOutput);
+    }
     public void sendMessageWithoutData(com.example.demo.Notifier.nofireF.model.Notification request)
             throws InterruptedException, ExecutionException {
         Message message = getPreconfiguredMessageWithoutData(request);
@@ -84,6 +93,12 @@ public class FCMService {
         return getPreconfiguredMessageBuilder(request).putAllData(data).setToken(request.getToken())
                 .build();
     }
+
+    private Message getPreconfiguredMessageWithDataReponce(Map<String, String> data, com.example.demo.Notifier.nofireF.model.NotificationReponce request) {
+        return getPreconfiguredMessageBuilderReponce(request).putAllData(data).setToken(request.getToken())
+                .build();
+    }
+
     private Message.Builder getPreconfiguredMessageBuilder(com.example.demo.Notifier.nofireF.model.Notification request) {
         AndroidConfig androidConfig = getAndroidConfig(request.getToken());
         ApnsConfig apnsConfig = getApnsConfig(request.getToken());
@@ -91,4 +106,13 @@ public class FCMService {
                 .setApnsConfig(apnsConfig).setAndroidConfig(androidConfig).setNotification(
                         new Notification(request.getTitle(), request.getMessage()));
     }
+
+    private Message.Builder getPreconfiguredMessageBuilderReponce(com.example.demo.Notifier.nofireF.model.NotificationReponce request) {
+        AndroidConfig androidConfig = getAndroidConfig(request.getToken());
+        ApnsConfig apnsConfig = getApnsConfig(request.getToken());
+        return Message.builder()
+                .setApnsConfig(apnsConfig).setAndroidConfig(androidConfig).setNotification(
+                        new Notification(request.getTitle(), request.getMessage()));
+    }
+
 }
