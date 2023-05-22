@@ -1,6 +1,7 @@
 package com.example.demo.Depart;
 
 import com.example.demo.Armoire.Armoire;
+import com.example.demo.User.utilisateur;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -26,6 +27,17 @@ public class Departt {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Caracteristique> caracteristiqueList;
+
+    @ManyToOne
+    private utilisateur AjouteurUser;
+
+    public utilisateur getAjouteurUser() {
+        return AjouteurUser;
+    }
+
+    public void setAjouteurUser(utilisateur ajouteurUser) {
+        AjouteurUser = ajouteurUser;
+    }
 
     @OneToOne
     private Armoire armoire;

@@ -5,6 +5,7 @@ import com.example.demo.Adresse.Adresse;
 import com.example.demo.Armoire.Armoire;
 import com.example.demo.Armoire.ArmoireCaracteristique;
 import com.example.demo.Intervention.Intervention;
+import com.example.demo.User.utilisateur;
 import com.example.demo.coordonnees.Coordonnees;
 import jakarta.persistence.*;
 
@@ -39,6 +40,16 @@ public class PointLumineux implements Serializable {
     private int temperature;
     private String class_electrique;
     private Date date_accussition;
+    @ManyToOne
+    private utilisateur AjouteurUser;
+
+    public utilisateur getAjouteurUser() {
+        return AjouteurUser;
+    }
+
+    public void setAjouteurUser(utilisateur ajouteurUser) {
+        AjouteurUser = ajouteurUser;
+    }
 
     @OneToOne()
     private Coordonnees coordonnees;

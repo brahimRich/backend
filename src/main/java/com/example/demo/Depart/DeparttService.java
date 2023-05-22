@@ -5,6 +5,8 @@ import com.example.demo.Armoire.*;
 import com.example.demo.Intervention.InterventionRepository;
 import com.example.demo.PointLumineux.PointLumineuxRepository;
 import com.example.demo.Technicienne.TechnicienneRepository;
+import com.example.demo.User.UserRepository;
+import com.example.demo.User.utilisateur;
 import com.example.demo.coordonnees.CoordonnesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,10 +27,11 @@ public class DeparttService {
     private final DepartRepository departRepository;
     private final CaracteristiqueRepository caracteristiqueRepository;
     private final TypeRepository typeRepository;
+    private final UserRepository userRepository;
 
 
     @Autowired
-    public DeparttService(PointLumineuxRepository PointLumineuxRepository, AdressRepository AdressRepository, CoordonnesRepository CoordonnesRepository, InterventionRepository interventionRepository, TechnicienneRepository technicienneRepository, ArmoireRepository armoireRepository, ArmoireServiceRepository armoireServiceRepository, ArmoireCaracteristiqueRepository armoireCaracteristiqueRepository,DepartRepository departRepository,CaracteristiqueRepository caracteristiqueRepository,TypeRepository typeRepository){
+    public DeparttService(PointLumineuxRepository PointLumineuxRepository, AdressRepository AdressRepository, CoordonnesRepository CoordonnesRepository, InterventionRepository interventionRepository, TechnicienneRepository technicienneRepository, ArmoireRepository armoireRepository, ArmoireServiceRepository armoireServiceRepository, ArmoireCaracteristiqueRepository armoireCaracteristiqueRepository,DepartRepository departRepository,CaracteristiqueRepository caracteristiqueRepository,TypeRepository typeRepository,UserRepository userRepository){
         this.PointLumineuxRepository = PointLumineuxRepository;
         this.AdressRepository=AdressRepository;
         this.CoordonnesRepository=CoordonnesRepository;
@@ -40,6 +43,7 @@ public class DeparttService {
         this.departRepository=departRepository;
         this.caracteristiqueRepository=caracteristiqueRepository;
         this.typeRepository=typeRepository;
+        this.userRepository=userRepository;
     }
 
     public List<Departt> getallDepart() {
@@ -48,6 +52,7 @@ public class DeparttService {
 
     public void addDepart(Departt departt) throws IllegalAccessException {
         System.out.println("add depart-----------------------------");
+        utilisateur u= userRepository.findById(departt.getAjouteurUser().getId()).orElseThrow(()-> new IllegalArgumentException("point with reference "+" does not exists"));
         for (Caracteristique caracteristique : departt.getCaracteristiqueList()) {
             //if not existe
             DepartType departType  = typeRepository.findTypeByName(caracteristique.getDepartType().getTypedepart());
@@ -55,6 +60,7 @@ public class DeparttService {
             else typeRepository.save(caracteristique.getDepartType());
             caracteristiqueRepository.save(caracteristique);
         }
+        if(u!=null) departt.setAjouteurUser(u);
         departRepository.save(departt);
     }
 

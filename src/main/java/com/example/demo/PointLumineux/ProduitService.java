@@ -2,6 +2,8 @@ package com.example.demo.PointLumineux;
 
 import com.example.demo.Adresse.AdressRepository;
 import com.example.demo.Adresse.Adresse;
+import com.example.demo.User.UserRepository;
+import com.example.demo.User.utilisateur;
 import com.example.demo.coordonnees.Coordonnees;
 import com.example.demo.coordonnees.CoordonnesRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,27 +18,34 @@ public class ProduitService {
     private final PointLumineuxRepository PointLumineuxRepository;
     private final com.example.demo.Adresse.AdressRepository AdressRepository;
     private final CoordonnesRepository CoordonnesRepository;
+    private final UserRepository userRepository;
+
 
     @Autowired
-    public ProduitService(PointLumineuxRepository PointLumineuxRepository,AdressRepository AdressRepository,CoordonnesRepository CoordonnesRepository){
+    public ProduitService(PointLumineuxRepository PointLumineuxRepository,AdressRepository AdressRepository,CoordonnesRepository CoordonnesRepository,UserRepository userRepository){
         this.PointLumineuxRepository = PointLumineuxRepository;
         this.AdressRepository=AdressRepository;
         this.CoordonnesRepository=CoordonnesRepository;
+        this.userRepository=userRepository;
     }
 
     public List<PointLumineux> getPointLumineux() {
         return PointLumineuxRepository.findAll();
     }
     public void addPointLumineux(PointLumineux produit) throws IllegalAccessException {
-        System.out.println("ajout ************************************ "+produit.getAdresse().getRue());
+        System.out.println("ajout ************************************ "+produit.getAjouteurUser().getId());
         /*Optional<PointLumineux> produitOptional = PointLumineuxRepository.findProduitByName(produit.getName());
         if(produitOptional.isPresent()){
             throw new IllegalAccessException("Name Token");
         }*/
+        utilisateur u= userRepository.findById(produit.getAjouteurUser().getId()).orElseThrow(()-> new IllegalArgumentException("point with reference "+" does not exists"));
+        if(u!=null) produit.setAjouteurUser(u);
         if(produit.getAdresse()!=null)
         AdressRepository.save(produit.getAdresse());
         CoordonnesRepository.save(produit.getCoordonnees());
         PointLumineuxRepository.save(produit);
+
+
     }
 
     public void deleteProduit(Long reference) throws IllegalAccessException {

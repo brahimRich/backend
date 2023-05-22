@@ -8,6 +8,7 @@ import com.example.demo.PointLumineux.PointLumineux;
 import com.example.demo.PointLumineux.PointLumineuxRepository;
 import com.example.demo.Technicienne.Technicienne;
 import com.example.demo.Technicienne.TechnicienneRepository;
+import com.example.demo.User.UserRepository;
 import com.example.demo.coordonnees.Coordonnees;
 import com.example.demo.coordonnees.CoordonnesRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -20,7 +21,7 @@ import java.util.List;
 @Configuration
 public class ArmoireConfig {
     @Bean
-    CommandLineRunner commandLineRunnerArmoire(PointLumineuxRepository pointLumineuxRepository, AdressRepository adressRepository, CoordonnesRepository coordonnesRepository, TechnicienneRepository technicienneRepository, InterventionRepository interventionRepository,ArmoireRepository armoireRepository,ArmoireServiceRepository armoireServiceRepository,ArmoireCaracteristiqueRepository armoireCaracteristiqueRepository){
+    CommandLineRunner commandLineRunnerArmoire(PointLumineuxRepository pointLumineuxRepository, AdressRepository adressRepository, CoordonnesRepository coordonnesRepository, TechnicienneRepository technicienneRepository, InterventionRepository interventionRepository, ArmoireRepository armoireRepository, ArmoireServiceRepository armoireServiceRepository, ArmoireCaracteristiqueRepository armoireCaracteristiqueRepository, UserRepository userRepository){
         return args -> {
             Adresse a=new Adresse("rueeeeeeee22", "quatierrrrrrr33");
             Coordonnees c=new Coordonnees(6,8);

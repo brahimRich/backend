@@ -5,6 +5,8 @@ import com.example.demo.Intervention.Intervention;
 import com.example.demo.Intervention.InterventionRepository;
 import com.example.demo.PointLumineux.PointLumineuxRepository;
 import com.example.demo.Technicienne.TechnicienneRepository;
+import com.example.demo.User.UserRepository;
+import com.example.demo.User.utilisateur;
 import com.example.demo.coordonnees.CoordonnesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,12 +26,13 @@ public class ArmoireService {
     private final ArmoireRepository armoireRepository;
     private final ArmoireServiceRepository armoireServiceRepository;
     private final ArmoireCaracteristiqueRepository armoireCaracteristiqueRepository;
+    private final UserRepository userRepository;
 
 
 
 
     @Autowired
-    public ArmoireService(PointLumineuxRepository PointLumineuxRepository, AdressRepository AdressRepository, CoordonnesRepository CoordonnesRepository, InterventionRepository interventionRepository, TechnicienneRepository technicienneRepository,ArmoireRepository armoireRepository,ArmoireServiceRepository armoireServiceRepository,ArmoireCaracteristiqueRepository armoireCaracteristiqueRepository){
+    public ArmoireService(PointLumineuxRepository PointLumineuxRepository, AdressRepository AdressRepository, CoordonnesRepository CoordonnesRepository, InterventionRepository interventionRepository, TechnicienneRepository technicienneRepository,ArmoireRepository armoireRepository,ArmoireServiceRepository armoireServiceRepository,ArmoireCaracteristiqueRepository armoireCaracteristiqueRepository,UserRepository userRepository){
         this.PointLumineuxRepository = PointLumineuxRepository;
         this.AdressRepository=AdressRepository;
         this.CoordonnesRepository=CoordonnesRepository;
@@ -38,6 +41,7 @@ public class ArmoireService {
         this.armoireRepository=armoireRepository;
         this.armoireServiceRepository=armoireServiceRepository;
         this.armoireCaracteristiqueRepository=armoireCaracteristiqueRepository;
+        this.userRepository=userRepository;
     }
 
     public List<Armoire> getallArmoires() {
@@ -46,7 +50,7 @@ public class ArmoireService {
 
     public void addArmoire(Armoire armoire) throws IllegalAccessException {
         Armoire newArmoire = new Armoire();
-
+        utilisateur u= userRepository.findById(armoire.getAjouteurUser().getId()).orElseThrow(()-> new IllegalArgumentException("point with reference "+" does not exists"));
         for (ArmoireCaracteristique armoireCaracteristique : armoire.getArmoireListe()) {
             armoireCaracteristique.setTypeArmoire(armoireCaracteristique.getTypeArmoire());
             System.out.println("id************************* "+armoireCaracteristique.getTypeArmoire().getId());
@@ -54,7 +58,7 @@ public class ArmoireService {
             newArmoire.getArmoireListe().add(armoireCaracteristique);
             armoireCaracteristiqueRepository.save(armoireCaracteristique);
         }
-
+        if(u!=null) newArmoire.setAjouteurUser(u);
        armoireRepository.save(newArmoire);
 
     }

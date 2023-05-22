@@ -5,6 +5,7 @@ import java.util.Date;
 import com.example.demo.Admin.Admin;
 import com.example.demo.PointLumineux.PointLumineux;
 import com.example.demo.Technicienne.Technicienne;
+import com.example.demo.User.utilisateur;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -39,10 +40,18 @@ public class Intervention {
     private List<Technicienne> techniciennes;
 
     @OneToOne
-    private Technicienne completeur;
+    private utilisateur completeur;
 
     @ManyToOne
     private Admin admin;
+
+    public utilisateur getCompleteur() {
+        return completeur;
+    }
+
+    public void setCompleteur(utilisateur completeur) {
+        this.completeur = completeur;
+    }
 
     @ManyToMany
     private List<PointLumineux> pointLumineuxList;
@@ -51,9 +60,6 @@ public class Intervention {
         return pointLumineuxList;
     }
 
-    public Technicienne getCompleteur() {
-        return completeur;
-    }
 
     public Admin getAdmin() {
         return admin;
@@ -63,9 +69,6 @@ public class Intervention {
         this.admin = admin;
     }
 
-    public void setCompleteur(Technicienne completeur) {
-        this.completeur = completeur;
-    }
 
     public void setPointLumineuxList(List<PointLumineux> pointLumineuxList) {
         this.pointLumineuxList = pointLumineuxList;

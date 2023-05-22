@@ -1,6 +1,7 @@
 package com.example.demo.Armoire;
 
 import com.example.demo.Depart.Departt;
+import com.example.demo.User.utilisateur;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -19,13 +20,19 @@ public class Armoire {
             generator = "Armoire_sequence"
     )
     private Long id;
+    @ManyToOne
+    private utilisateur AjouteurUser;
 
     @ManyToMany
     private List<ArmoireCaracteristique> ArmoireListe=new ArrayList<>();
 
+    public utilisateur getAjouteurUser() {
+        return AjouteurUser;
+    }
 
-
-
+    public void setAjouteurUser(utilisateur ajouteurUser) {
+        AjouteurUser = ajouteurUser;
+    }
 
     public Armoire(List<ArmoireCaracteristique> armoireListe, List<TypeArmoire> typeArmoireList) {
         ArmoireListe = armoireListe;

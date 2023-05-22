@@ -2,6 +2,7 @@ package com.example.demo.Notifier.nofireF;
 
 import com.example.demo.Armoire.Armoire;
 import com.example.demo.Armoire.ArmoireService;
+import com.example.demo.Intervention.Intervention;
 import com.example.demo.Notifier.nofireF.model.Notification;
 import com.example.demo.Notifier.nofireF.model.NotificationReponce;
 import com.example.demo.Notifier.nofireF.model.NotificationService;
@@ -19,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -56,6 +58,16 @@ public class PushNotificationController {
     @GetMapping("/getAll")
     public List<Notification> getpointLumineux() {
         return notificationService.getAllNotification();
+    }
+
+    @GetMapping("/getInterBuDate/{reference}")
+    public Notification getpointLumineuxb(@PathVariable("reference") LocalDateTime d) throws IllegalAccessException {
+        return notificationService.getinterventionByDate(d);
+    }
+
+    @GetMapping("/getNotiByInter/{reference}")
+    public Notification getNotificationbyintervention(@PathVariable("reference") Long d) throws IllegalAccessException {
+        return notificationService.getNotificationbyintervention(d);
     }
 
     @GetMapping("/getAllR")

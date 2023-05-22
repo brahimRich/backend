@@ -10,9 +10,12 @@ import com.example.demo.Intervention.InterventionRepository;
 import com.example.demo.PointLumineux.PointLumineuxRepository;
 import com.example.demo.Technicienne.Technicienne;
 import com.example.demo.Technicienne.TechnicienneRepository;
+import com.example.demo.User.UserRepository;
+import com.example.demo.User.utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,17 +27,19 @@ public class NotificationService {
     private final PointLumineuxRepository pointLumineuxRepository;
     private final NotificationReponceRepository notificationReponceRepository;
     private final AdminRepository adminRepository;
+    private final UserRepository userRepository;
 
 
 
     @Autowired
-    public NotificationService(NotificationRepository notificationRepository,TechnicienneRepository technicienneRepository,InterventionRepository interventionRepository,PointLumineuxRepository pointLumineuxRepository, NotificationReponceRepository notificationReponceRepository,AdminRepository adminRepository){
+    public NotificationService(NotificationRepository notificationRepository,TechnicienneRepository technicienneRepository,InterventionRepository interventionRepository,PointLumineuxRepository pointLumineuxRepository, NotificationReponceRepository notificationReponceRepository,AdminRepository adminRepository,UserRepository userRepository){
         this.notificationRepository = notificationRepository;
         this.technicienneRepository=technicienneRepository;
         this.interventionRepository=interventionRepository;
         this.pointLumineuxRepository=pointLumineuxRepository;
         this.notificationReponceRepository=notificationReponceRepository;
         this.adminRepository=adminRepository;
+        this.userRepository=userRepository;
     }
 
     public List<Notification> getAllNotification() {
@@ -98,17 +103,28 @@ public class NotificationService {
         notificationRepository.save(not);
     }
 
+    public Notification getinterventionByDate(LocalDateTime d)throws IllegalAccessException{
+        return notificationRepository.findTypeByDate(d);
+    }
+
+
+
+    public Notification getNotificationbyintervention(Long d)throws IllegalAccessException{
+        return notificationRepository.findByIntervention(d);
+    }
+
     public void addNotificationAdmin(NotificationReponce notification) throws IllegalAccessException {
-        System.out.println("save notification Admin ************");
+        System.out.println("save notification Admin ************"+notification.getNotification().getIntervention().getCompleteur().getId());
         Notification i=new Notification();
-        Technicienne t=new Technicienne();
+        utilisateur t=new utilisateur();
         boolean bx = notificationRepository.existsById(notification.getNotification().getId());
         if(bx) {
             System.out.println("-------------------------------------------------------------------------type "+notification.getNotification().getIntervention().getDure_Intervention());
             String dur=notification.getNotification().getIntervention().getDure_Intervention();
             String etat=notification.getNotification().getIntervention().getEtat_intervention();
             i=notificationRepository.getReferenceById(notification.getNotification().getId());
-            t=technicienneRepository.getReferenceById(notification.getNotification().getIntervention().getCompleteur().getId());
+            t=userRepository.getReferenceById(notification.getNotification().getIntervention().getCompleteur().getId());
+            System.out.println("-------------------------------------------------------------------------type "+t.getNom());
             i.getIntervention().setCompleteur(t);
             notification.setNotification(i);
 
