@@ -28,6 +28,15 @@ public class utilisateur {
     @Column(insertable=false, updatable=false)
     protected String dtype;
     protected String tele;
+    protected String nbrNotification;
+
+    public String getNbrNotification() {
+        return nbrNotification;
+    }
+
+    public void setNbrNotification(String nbrNotification) {
+        this.nbrNotification = nbrNotification;
+    }
 
     public String getTele() {
         return tele;

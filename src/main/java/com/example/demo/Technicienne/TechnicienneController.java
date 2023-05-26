@@ -94,6 +94,14 @@ public class TechnicienneController {
         technicienneService.AddOrUpdateRole(reference,role);
     }
 
+    @PutMapping(value = "updNot/{user}/{nbr}")
+    public void updatenbrnotifi(
+            @PathVariable("user") Long reference,
+            @PathVariable("nbr") String role
+    ) throws IllegalAccessException {
+        technicienneService.updatanbrnotification(reference,role);
+    }
+
     @PutMapping(value = "DelleteRole/{user}/{role}")
     public void DeleteRole(
             @PathVariable("user") Long reference,

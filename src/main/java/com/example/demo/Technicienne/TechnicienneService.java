@@ -41,6 +41,13 @@ public class TechnicienneService {
         userRepository.save(technicienne);
     }
 
+    public void updatanbrnotification(Long user,String nbr){
+        utilisateur technicienne = userRepository.findById(user).orElseThrow(()-> new IllegalArgumentException("point with reference "+" does not exists"));
+        technicienne.setNbrNotification(nbr);
+        userRepository.save(technicienne);
+    }
+
+
     public void addUser(utilisateur user) throws IllegalAccessException {
         userRepository.save(user);
     }

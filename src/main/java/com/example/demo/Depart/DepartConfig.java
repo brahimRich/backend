@@ -30,7 +30,7 @@ public class DepartConfig {
             PointLumineux p2 = new PointLumineux("pointtttt",278.7,714.2,a,c);
             pointLumineuxRepository.save(p2);
 
-            Technicienne t=new Technicienne("rida","mihi","jh21d");
+            /*Technicienne t=new Technicienne("rida","mihi","jh21d");
             technicienneRepository.save(t);
 
             ArrayList<PointLumineux> lp=new ArrayList<>();

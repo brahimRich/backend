@@ -26,14 +26,14 @@ public class InterventionConfig {
             PointLumineux p2 = new PointLumineux("point",27.7,7.2,a,c);
             pointLumineuxRepository.save(p2);
 
-            Technicienne t=new Technicienne("rich","brahim","jh21d");
+            /*Technicienne t=new Technicienne("rich","brahim","jh21d");
             technicienneRepository.save(t);
 
             ArrayList<PointLumineux> lp=new ArrayList<>();
             lp.add(p2);
 
             ArrayList<Technicienne> techniciennes=new ArrayList<>();
-            techniciennes.add(t);
+            techniciennes.add(t);*/
 
             /*Intervention intervention=new Intervention(null,"type","intetulle",15,0,lp,techniciennes);
             interventionRepository.save(intervention);*/

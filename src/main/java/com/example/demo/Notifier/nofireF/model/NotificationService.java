@@ -54,6 +54,19 @@ public class NotificationService {
         Technicienne t=new Technicienne();
         Intervention i=new Intervention();
         Boolean ex=technicienneRepository.existsById(notification.getTechnicienne().getId());
+
+        utilisateur technicienne = userRepository.findById(notification.getTechnicienne().getId()).orElseThrow(()-> new IllegalArgumentException("point with reference "+" does not exists"));
+        String nbr=technicienne.getNbrNotification();
+        if(nbr!=null) {
+            int nbrr = Integer.parseInt(nbr);
+            nbrr++;
+            nbr = String.valueOf(nbrr);
+            technicienne.setNbrNotification(nbr);
+        }else{
+            technicienne.setNbrNotification("1");
+        }
+        userRepository.save(technicienne);
+
         if (notification.getIntervention()!=null) {
             if (notification.getIntervention().getPointLumineuxList() == null) {
                 notification.getIntervention().setPointLumineuxList(new ArrayList<>());
@@ -77,6 +90,7 @@ public class NotificationService {
             }
         }
         if(ex){
+
             t=technicienneRepository.getReferenceById(notification.getTechnicienne().getId());
             notification.setTechnicienne(t);
             notificationRepository.save(notification);
@@ -119,6 +133,17 @@ public class NotificationService {
         utilisateur t=new utilisateur();
         boolean bx = notificationRepository.existsById(notification.getNotification().getId());
         if(bx) {
+            utilisateur technicienne = userRepository.findById(notification.getNotification().getIntervention().getAdmin().getId()).orElseThrow(()-> new IllegalArgumentException("point with reference "+" does not exists"));
+            String nbr=technicienne.getNbrNotification();
+            if(nbr!=null) {
+                int nbrr = Integer.parseInt(nbr);
+                nbrr++;
+                nbr = String.valueOf(nbrr);
+                technicienne.setNbrNotification(nbr);
+            }else{
+                technicienne.setNbrNotification("1");
+            }
+            userRepository.save(technicienne);
             System.out.println("-------------------------------------------------------------------------type "+notification.getNotification().getIntervention().getDure_Intervention());
             String dur=notification.getNotification().getIntervention().getDure_Intervention();
             String etat=notification.getNotification().getIntervention().getEtat_intervention();

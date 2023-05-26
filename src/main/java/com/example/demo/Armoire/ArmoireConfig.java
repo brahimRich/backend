@@ -30,18 +30,18 @@ public class ArmoireConfig {
             PointLumineux p2 = new PointLumineux("pointtttt",278.7,714.2,a,c);
             pointLumineuxRepository.save(p2);
 
-            Technicienne t=new Technicienne("rida","mihi","jh21d");
+            /*Technicienne t=new Technicienne("rida","mihi","jh21d");
             technicienneRepository.save(t);
 
             ArrayList<PointLumineux> lp=new ArrayList<>();
             lp.add(p2);
 
             ArrayList<Technicienne> techniciennes=new ArrayList<>();
-            techniciennes.add(t);
+            techniciennes.add(t);*/
 
-            Intervention intervention=new Intervention(null,"type","intetulle","15","0",lp,techniciennes,null);
+            /*Intervention intervention=new Intervention(null,"type","intetulle","15","0",lp,techniciennes,null);
             interventionRepository.save(intervention);
-
+*/
             TypeArmoire typeArmoire=new TypeArmoire("selectionneur",new ArrayList<>());
 
             //typeArmoire.setId(1L);

@@ -20,8 +20,8 @@ public class ProduitConfig {
             Coordonnees c=new Coordonnees(1,2);
             adressRepository.save(a);
             coordonnesRepository.save(c);
-            PointLumineux p1 = new PointLumineux("Brahim",12.2,16.2,a,c);
-            PointLumineux p2 = new PointLumineux("Rida",22.7,2.2,a,c);
+            PointLumineux p1 = new PointLumineux("point 1",12.2,16.2,a,c);
+            PointLumineux p2 = new PointLumineux("point 2",22.7,2.2,a,c);
             pointLumineuxRepository.save(p1);
             pointLumineuxRepository.save(p2);
         };
