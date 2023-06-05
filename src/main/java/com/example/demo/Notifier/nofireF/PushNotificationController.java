@@ -50,7 +50,7 @@ public class PushNotificationController {
     }
     @PostMapping("/data")
     public ResponseEntity sendDataNotification(@RequestBody com.example.demo.Notifier.nofireF.model.Notification request) throws FirebaseMessagingException, IllegalAccessException {
-        pushNotificationService.sendPushNotification(request,request.getTechnicienne().getIdc(), request.getIntervention());
+        //pushNotificationService.sendPushNotification(request,request.getTechnicienne().getIdc(), request.getIntervention());
         notificationService.addNotification(request);
         return new ResponseEntity<>(new PushNotificationResponse(HttpStatus.OK.value(), "Notification has been sent."), HttpStatus.OK);
     }

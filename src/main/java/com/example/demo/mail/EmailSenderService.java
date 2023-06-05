@@ -20,9 +20,12 @@ public class EmailSenderService {
     public void sendEmail(String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
+        message.setFrom("brahimrichbra14@gmail.com");
         message.setSubject(subject);
         message.setText(body);
+        mailSender.send(message); // Add this line to send the email
     }
+
     public void sendHtmlEmail(String to, String subject, String body) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
