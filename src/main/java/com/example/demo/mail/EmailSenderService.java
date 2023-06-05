@@ -14,47 +14,34 @@ import java.io.File;
 
 @Service
 public class EmailSenderService {
-
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendSimpleEmail(String toEmail,
-                                String body,
-                                String subject) {
+    public void sendEmail(String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
-
-        message.setFrom("spring.email.from@gmail.com");
-        message.setTo(toEmail);
-        message.setText(body);
+        message.setTo(to);
         message.setSubject(subject);
-
+        message.setText(body);
+    }
+    public void sendHtmlEmail(String to, String subject, String body) throws MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(body, true);
         mailSender.send(message);
-        System.out.println("Mail Send...");
     }
 
-    public void sendEmailWithAttachment(String toEmail,
-                                        String body,
-                                        String subject,
-                                        String attachment) throws MessagingException {
+    public void sendHtmlEmailWithAttachment(String to, String subject, String body, String attachmentPath) throws MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(body, true);
 
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        FileSystemResource attachment = new FileSystemResource(attachmentPath);
+        helper.addAttachment(attachment.getFilename(), attachment);
 
-        MimeMessageHelper mimeMessageHelper
-                = new MimeMessageHelper(mimeMessage, true);
-
-        mimeMessageHelper.setFrom("spring.email.from@gmail.com");
-        mimeMessageHelper.setTo(toEmail);
-        mimeMessageHelper.setText(body);
-        mimeMessageHelper.setSubject(subject);
-
-        FileSystemResource fileSystem
-                = new FileSystemResource(new File(attachment));
-
-        mimeMessageHelper.addAttachment(fileSystem.getFilename(),
-                fileSystem);
-
-        mailSender.send(mimeMessage);
-        System.out.println("Mail Send...");
-
+        mailSender.send(message);
     }
 }

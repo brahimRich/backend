@@ -28,6 +28,10 @@ public class RoleConfig {
             Role role5=new Role("Ajout point");
             Role role55=new Role("liste des points");
 
+            Role role6=new Role("Block le compte");
+
+            Role role7=new Role("Modifier info personnel");
+
             roleReposotory.save(role1);
             roleReposotory.save(role11);
             roleReposotory.save(role2);
@@ -38,6 +42,8 @@ public class RoleConfig {
             roleReposotory.save(role44);
             roleReposotory.save(role5);
             roleReposotory.save(role55);
+            roleReposotory.save(role6);
+            roleReposotory.save(role7);
 
         };
     }

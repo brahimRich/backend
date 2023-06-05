@@ -81,7 +81,7 @@ public class TechnicienneController {
     @PutMapping(value = "update/{reference}")
     public void updatepointLumineux(
             @PathVariable("reference") Long reference,
-            @RequestBody Technicienne technicienne
+            @RequestBody utilisateur technicienne
     ) throws IllegalAccessException {
         technicienneService.updateTechnicienne(reference,technicienne);
     }

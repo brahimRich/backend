@@ -109,13 +109,13 @@ public class TechnicienneService {
     }
 
     @Transactional
-    public void updateTechnicienne(Long reference, Technicienne t) throws IllegalAccessException {
+    public void updateTechnicienne(Long reference, utilisateur t) throws IllegalAccessException {
         System.out.println("updatee ************************************ "+reference);
-        Technicienne technicienne = technicienneRepository.findById(reference).orElseThrow(()-> new IllegalArgumentException("point with reference "+reference+" does not exists"));
+        utilisateur technicienne = userRepository.findById(reference).orElseThrow(()-> new IllegalArgumentException("point with reference "+reference+" does not exists"));
         technicienne.setCin(t.getCin());
         technicienne.setNom(t.getNom());
         technicienne.setPrenom(t.getPrenom());
-        technicienneRepository.save(technicienne);
+        userRepository.save(technicienne);
     }
 
 }
