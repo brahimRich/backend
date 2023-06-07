@@ -2,6 +2,8 @@ package com.example.demo.PointLumineux;
 
 import com.example.demo.Adresse.AdressRepository;
 import com.example.demo.Adresse.Adresse;
+import com.example.demo.Armoire.Armoire;
+import com.example.demo.Armoire.ArmoireRepository;
 import com.example.demo.User.UserRepository;
 import com.example.demo.User.utilisateur;
 import com.example.demo.coordonnees.Coordonnees;
@@ -19,14 +21,17 @@ public class ProduitService {
     private final com.example.demo.Adresse.AdressRepository AdressRepository;
     private final CoordonnesRepository CoordonnesRepository;
     private final UserRepository userRepository;
+    private final ArmoireRepository armoireRepository;
+
 
 
     @Autowired
-    public ProduitService(PointLumineuxRepository PointLumineuxRepository,AdressRepository AdressRepository,CoordonnesRepository CoordonnesRepository,UserRepository userRepository){
+    public ProduitService(PointLumineuxRepository PointLumineuxRepository,AdressRepository AdressRepository,CoordonnesRepository CoordonnesRepository,UserRepository userRepository,ArmoireRepository armoireRepository){
         this.PointLumineuxRepository = PointLumineuxRepository;
         this.AdressRepository=AdressRepository;
         this.CoordonnesRepository=CoordonnesRepository;
         this.userRepository=userRepository;
+        this.armoireRepository=armoireRepository;
     }
 
     public List<PointLumineux> getPointLumineux() {
@@ -80,6 +85,12 @@ public class ProduitService {
         coordonnees=p.getCoordonnees();
         AdressRepository.save(adresse);
         CoordonnesRepository.save(coordonnees);
+        if(p.getArmoire()!=null && p.getArmoire().getId()!=0){
+            Armoire a = armoireRepository.findById(p.getArmoire().getId()).orElseThrow(()-> new IllegalArgumentException("point with reference "+" does not exists"));
+            p.setArmoire(a);
+            a.getPointluminexs().add(pointLumineux);
+            armoireRepository.save(a);
+        }
         PointLumineuxRepository.save(pointLumineux);
     }
 }

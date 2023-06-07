@@ -1,6 +1,7 @@
 package com.example.demo.Armoire;
 
 import com.example.demo.Depart.Departt;
+import com.example.demo.PointLumineux.PointLumineux;
 import com.example.demo.User.utilisateur;
 import jakarta.persistence.*;
 
@@ -25,6 +26,17 @@ public class Armoire {
 
     @ManyToMany
     private List<ArmoireCaracteristique> ArmoireListe=new ArrayList<>();
+
+    @OneToMany
+    private List<PointLumineux> Pointluminexs=new ArrayList<>();
+
+    public List<PointLumineux> getPointluminexs() {
+        return Pointluminexs;
+    }
+
+    public void setPointluminexs(List<PointLumineux> pointluminexs) {
+        Pointluminexs = pointluminexs;
+    }
 
     public utilisateur getAjouteurUser() {
         return AjouteurUser;
