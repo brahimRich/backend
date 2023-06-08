@@ -87,10 +87,12 @@ public class ProduitService {
         CoordonnesRepository.save(coordonnees);
         if(p.getArmoire()!=null && p.getArmoire().getId()!=0){
             Armoire a = armoireRepository.findById(p.getArmoire().getId()).orElseThrow(()-> new IllegalArgumentException("point with reference "+" does not exists"));
-            p.setArmoire(a);
+            //pointLumineux.setArmoire(a);
+            PointLumineuxRepository.save(pointLumineux);
             a.getPointluminexs().add(pointLumineux);
             armoireRepository.save(a);
+        }else{
+            PointLumineuxRepository.save(pointLumineux);
         }
-        PointLumineuxRepository.save(pointLumineux);
     }
 }

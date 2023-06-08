@@ -32,6 +32,13 @@ public class RoleConfig {
 
             Role role7=new Role("Modifier info personnel");
 
+            Role role8=new Role("Modifier Armoire");
+
+            Role role9=new Role("Modifier Depart");
+
+            Role role10=new Role("modifer des users");
+
+
             roleReposotory.save(role1);
             roleReposotory.save(role11);
             roleReposotory.save(role2);
@@ -44,6 +51,10 @@ public class RoleConfig {
             roleReposotory.save(role55);
             roleReposotory.save(role6);
             roleReposotory.save(role7);
+            roleReposotory.save(role8);
+            roleReposotory.save(role9);
+            roleReposotory.save(role10);
+
 
         };
     }

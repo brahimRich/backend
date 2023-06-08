@@ -168,7 +168,7 @@ public class PointLumineux implements Serializable {
 
     public PointLumineux(String type, double longitude, double latitude, Adresse a, Coordonnees c, Armoire armoire, List<Intervention> interventions) {
         //this.InterventionList = interventions;
-        this.armoire = armoire;
+        this.armoire = new Armoire();
         this.type = type;
         this.longitude = longitude;
         this.latitude = latitude;

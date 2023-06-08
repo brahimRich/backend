@@ -114,6 +114,9 @@ public class TechnicienneService {
         utilisateur technicienne = userRepository.findById(reference).orElseThrow(()-> new IllegalArgumentException("point with reference "+reference+" does not exists"));
         technicienne.setCin(t.getCin());
         technicienne.setNom(t.getNom());
+        technicienne.setTele(t.getTele());
+        technicienne.setPrenom(t.getPrenom());
+        technicienne.setEmail(t.getEmail());
         technicienne.setPrenom(t.getPrenom());
         userRepository.save(technicienne);
     }

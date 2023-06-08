@@ -28,7 +28,7 @@ public class ArmoireConfig {
             adressRepository.save(a);
             coordonnesRepository.save(c);
             PointLumineux p2 = new PointLumineux("pointtttt",278.7,714.2,a,c);
-            pointLumineuxRepository.save(p2);
+           // pointLumineuxRepository.save(p2);
 
             /*Technicienne t=new Technicienne("rida","mihi","jh21d");
             technicienneRepository.save(t);
