@@ -11,7 +11,7 @@ public class AdminConfig {
     @Bean
     CommandLineRunner commandLineRunnerAdmin(AdminRepository AdminRepository){
         return args -> {
-            Admin a1=new Admin("rich","brahim","email","code");
+            Admin a1=new Admin("rich","brahim","email14@gmail.com","code");
             AdminRepository.save(a1);
         };
     }

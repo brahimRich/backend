@@ -57,6 +57,16 @@ public class PointLumineux implements Serializable {
     @OneToOne
     private Adresse adresse;
 
+    public Long getIdarmo() {
+        return idarmo;
+    }
+
+    public void setIdarmo(Long idarmo) {
+        this.idarmo = idarmo;
+    }
+
+    private Long idarmo;
+
     /*//Intervention
     @ManyToMany
     private List<Intervention> InterventionList=new ArrayList<>();

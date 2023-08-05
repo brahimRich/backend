@@ -13,7 +13,7 @@ public class TechnicienneConfig {
     @Bean
     CommandLineRunner commandLineRunnerTechnicienne(TechnicienneRepository technicienneRepository){
         return args -> {
-            Technicienne t1=new Technicienne("ellbabe","ahmmed","cin");
+            Technicienne t1=new Technicienne("Rich2","Brahim2","cin");
             technicienneRepository.save(t1);
         };
     }

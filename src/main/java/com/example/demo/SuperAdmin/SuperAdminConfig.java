@@ -13,7 +13,7 @@ public class SuperAdminConfig {
     @Bean
     CommandLineRunner commandLineRunnerSuperAdmin(SuperAdminRepository SuperAdminRepository){
         return args -> {
-            SuperAdmin t1=new SuperAdmin("rich","brahim","admin","admin");
+            SuperAdmin t1=new SuperAdmin("rich","brahim","admin14@gmail.com","admin");
             SuperAdminRepository.save(t1);
         };
     }

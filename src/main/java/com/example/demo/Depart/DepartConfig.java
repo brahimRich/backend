@@ -42,7 +42,7 @@ public class DepartConfig {
             /*Intervention intervention=new Intervention(null,"type","intetulle",15,0,lp,techniciennes);
             interventionRepository.save(intervention);*/
 
-            TypeArmoire typeArmoire=new TypeArmoire("selectionneur",new ArrayList<>());
+            /*TypeArmoire typeArmoire=new TypeArmoire("selectionneur",new ArrayList<>());
 
             TypeArmoire typeArmoire2=new TypeArmoire("porte fusible",new ArrayList<>());
 
@@ -50,7 +50,7 @@ public class DepartConfig {
             ArmoireCaracteristique armoireCaracteristique=new ArmoireCaracteristique("marque1","qualibre2",16,typeArmoire);
 
             ArmoireCaracteristique armoireCaracteristique2=new ArmoireCaracteristique("marque2","qualibre2",17,typeArmoire2);
-
+*/
 //1
            /* armoireServiceRepository.save(typeArmoire);
 

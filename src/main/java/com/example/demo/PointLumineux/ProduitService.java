@@ -86,11 +86,15 @@ public class ProduitService {
         AdressRepository.save(adresse);
         CoordonnesRepository.save(coordonnees);
         if(p.getArmoire()!=null && p.getArmoire().getId()!=0){
-            Armoire a = armoireRepository.findById(p.getArmoire().getId()).orElseThrow(()-> new IllegalArgumentException("point with reference "+" does not exists"));
-            //pointLumineux.setArmoire(a);
-            PointLumineuxRepository.save(pointLumineux);
+            Armoire a = new Armoire();
+            a = armoireRepository.findById(p.getArmoire().getId()).orElseThrow(()-> new IllegalArgumentException("point with reference "+" does not exists"));
             a.getPointluminexs().add(pointLumineux);
             armoireRepository.save(a);
+            //pointLumineux.setArmoire(a);
+            pointLumineux.setIdarmo(a.getId());
+            System.out.println("**************************************************** awa ilma" );
+            PointLumineuxRepository.save(pointLumineux);
+
         }else{
             PointLumineuxRepository.save(pointLumineux);
         }

@@ -10,8 +10,9 @@ public class Technicienne extends utilisateur {
         this.nom = nom;
         this.prenom = prenom;
         this.cin = cin;
-        this.email="brahim";
+        this.email="brahim22@gmail.com";
         this.password="rich";
+        this.tele="0697943218";
     }
 
     public Technicienne() {
